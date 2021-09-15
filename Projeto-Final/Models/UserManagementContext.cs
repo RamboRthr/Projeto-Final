@@ -10,6 +10,7 @@ namespace Projeto_Final.Models
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Pets> Pets  { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public UserManagementContext(DbContextOptions<UserManagementContext> options):base(options) { }
     }
 }
