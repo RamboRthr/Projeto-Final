@@ -1,18 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Projeto_Final.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Projeto_Final
 {
@@ -34,7 +27,8 @@ namespace Projeto_Final
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Projeto_Final", Version = "v1" });
             });
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<UserManagementContext>((sp, options) => {
+            services.AddEntityFrameworkNpgsql().AddDbContext<UserManagementContext>((sp, options) =>
+            {
                 options.UseNpgsql(Configuration.GetConnectionString("Default"));
                 options.UseInternalServiceProvider(sp);
             });
