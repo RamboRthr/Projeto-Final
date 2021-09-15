@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projeto_Final.Models
 {
-    public class Users : Pessoa
+    public class Users : Person
     {
         public bool Adopted { get; set; }
         public bool Donated { get; set; }

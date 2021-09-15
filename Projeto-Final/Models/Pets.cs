@@ -19,5 +19,6 @@ namespace Projeto_Final.Models
         public bool Adopted { get; set; }
         public string OldOwner { get; set; }
         public string NewOwner { get; set; }
+        public List<Photo> Photos { get; set; }
     }
 }
