@@ -10,16 +10,13 @@ namespace Projeto_Final.Models
     {
         [Key]
         public int Id { get; set; }
-        [Key]
         public  string CPF { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        [Key]
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }
-        [Key]
         private string Password { get; set; }
 
     }
