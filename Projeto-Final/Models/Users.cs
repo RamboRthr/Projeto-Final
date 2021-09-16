@@ -15,7 +15,10 @@ namespace Projeto_Final.Models
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Address { get; set; }
+        public string District { get; set; }
+        public string Road { get; set; }
+        public string House_number { get; set; }
+        public string CEP { get; set; }
         public DateTime BirthDate { get; set; }
         public string Password { get; set; }
         public bool Adopted { get; set; }
