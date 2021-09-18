@@ -16,7 +16,7 @@ namespace Projeto_Final.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string District { get; set; }
-        public string Road { get; set; }
+        public string Street { get; set; }
         public string House_number { get; set; }
         public string CEP { get; set; }
         public DateTime BirthDate { get; set; }
