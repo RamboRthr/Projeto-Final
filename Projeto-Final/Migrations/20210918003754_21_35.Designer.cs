@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Projeto_Final.Models;
@@ -9,9 +10,10 @@ using Projeto_Final.Models;
 namespace Projeto_Final.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    partial class UserManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20210918003754_21_35")]
+    partial class _21_35
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -38,6 +38,7 @@ namespace Projeto_Final
                 options.UseNpgsql(Configuration.GetConnectionString("Default"));
                 options.UseInternalServiceProvider(sp);
             });
+            services.AddCors();
 
         }
 
@@ -61,6 +62,11 @@ namespace Projeto_Final
             {
                 endpoints.MapControllers();
             });
+            app.UseCors(options =>
+                    options.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    ); // allow credentials
         }
     }
 }
