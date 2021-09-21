@@ -10,8 +10,8 @@ using Projeto_Final.Models;
 namespace Projeto_Final.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    [Migration("20210915224030_v02")]
-    partial class v02
+    [Migration("20210920223211_startup")]
+    partial class startup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,10 @@ namespace Projeto_Final.Migrations
                     b.Property<bool>("Adopted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Age")
+                    b.Property<int>("Age_months")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Age_years")
                         .HasColumnType("integer");
 
                     b.Property<string>("Animal")
@@ -96,22 +99,28 @@ namespace Projeto_Final.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
                     b.Property<bool>("Adopted")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("CEP")
+                        .HasColumnType("text");
+
                     b.Property<string>("CPF")
+                        .HasColumnType("text");
+
+                    b.Property<string>("District")
                         .HasColumnType("text");
 
                     b.Property<bool>("Donated")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("House_number")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -121,6 +130,9 @@ namespace Projeto_Final.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
                         .HasColumnType("text");
 
                     b.Property<string>("Surname")

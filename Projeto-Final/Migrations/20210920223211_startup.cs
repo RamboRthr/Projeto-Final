@@ -2,7 +2,7 @@
 
 namespace Projeto_Final.Migrations
 {
-    public partial class _21_35 : Migration
+    public partial class startup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
