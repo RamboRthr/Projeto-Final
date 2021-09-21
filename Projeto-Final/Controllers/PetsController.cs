@@ -27,7 +27,7 @@ namespace Projeto_Final.Controllers
             return await _context.Pets.ToListAsync();
         }
 
-        // GET: api/Pets/5
+        // GET:  api/Pets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Pets>> GetPets(int id)
         {
