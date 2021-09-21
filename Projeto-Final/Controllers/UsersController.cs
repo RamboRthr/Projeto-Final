@@ -11,6 +11,7 @@ namespace Projeto_Final.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class UsersController : ControllerBase
     {
         private readonly UserManagementContext _context;

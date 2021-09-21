@@ -18,6 +18,7 @@ namespace Projeto_Final
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +29,16 @@ namespace Projeto_Final
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -38,7 +49,6 @@ namespace Projeto_Final
                 options.UseNpgsql(Configuration.GetConnectionString("Default"));
                 options.UseInternalServiceProvider(sp);
             });
-            services.AddCors();
 
         }
 
@@ -52,6 +62,8 @@ namespace Projeto_Final
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Projeto_Final v1"));
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -62,11 +74,7 @@ namespace Projeto_Final
             {
                 endpoints.MapControllers();
             });
-            app.UseCors(options =>
-                    options.WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    ); // allow credentials
+             // allow credentials
         }
     }
 }
