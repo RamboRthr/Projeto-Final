@@ -10,8 +10,8 @@ using Projeto_Final.Models;
 namespace Projeto_Final.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    [Migration("20210920223211_startup")]
-    partial class startup
+    [Migration("20210921005403_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
