@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,5 +24,7 @@ namespace Projeto_Final.Models
         public string Password { get; set; }
         public bool Adopted { get; set; }
         public bool Donated { get; set; }
+        [NotMapped]
+        public List<Pets> MyProperty { get; set; }
     }
 }
