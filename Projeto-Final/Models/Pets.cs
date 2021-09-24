@@ -18,8 +18,8 @@ namespace Projeto_Final.Models
         public int Age_months { get; set; }
         public string Size { get; set; } 
         public bool Adopted { get; set; }
-        public Users Old_owner_id { get; set; }
-        public Users New_owner_id { get; set; }
+        public virtual Users Old_owner_id { get; set; }
+        public virtual Users New_owner_id { get; set; }
         public List<Photo> Photos { get; set; }
     }
 }
