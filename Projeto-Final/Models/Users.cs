@@ -24,7 +24,6 @@ namespace Projeto_Final.Models
         public string Password { get; set; }
         public bool Adopted { get; set; }
         public bool Donated { get; set; }
-        [NotMapped]
-        public List<Pets> MyProperty { get; set; }
+        public List<Pets> Pets { get; set; }
     }
 }
