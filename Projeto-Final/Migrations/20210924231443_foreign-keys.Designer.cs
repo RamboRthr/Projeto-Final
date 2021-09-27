@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Projeto_Final.Models;
@@ -9,9 +10,10 @@ using Projeto_Final.Models;
 namespace Projeto_Final.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    partial class UserManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20210924231443_foreign-keys")]
+    partial class foreignkeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,11 +43,11 @@ namespace Projeto_Final.Migrations
                     b.Property<string>("Breed")
                         .HasColumnType("text");
 
-                    b.Property<int?>("Current_ownerId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
+                    b.Property<int?>("New_ownerId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Publication_date")
                         .HasColumnType("timestamp without time zone");
@@ -55,7 +57,7 @@ namespace Projeto_Final.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Current_ownerId");
+                    b.HasIndex("New_ownerId");
 
                     b.ToTable("Pets");
                 });
@@ -67,10 +69,13 @@ namespace Projeto_Final.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Pet_name")
+                        .HasColumnType("text");
+
                     b.Property<int?>("PetsId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("PhotoPath")
+                    b.Property<string>("PhotoURL")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Publication_date")
@@ -136,11 +141,11 @@ namespace Projeto_Final.Migrations
 
             modelBuilder.Entity("Projeto_Final.Models.Pets", b =>
                 {
-                    b.HasOne("Projeto_Final.Models.Users", "Current_owner")
-                        .WithMany("Pets")
-                        .HasForeignKey("Current_ownerId");
+                    b.HasOne("Projeto_Final.Models.Users", "New_owner")
+                        .WithMany()
+                        .HasForeignKey("New_ownerId");
 
-                    b.Navigation("Current_owner");
+                    b.Navigation("New_owner");
                 });
 
             modelBuilder.Entity("Projeto_Final.Models.Photo", b =>
@@ -153,11 +158,6 @@ namespace Projeto_Final.Migrations
             modelBuilder.Entity("Projeto_Final.Models.Pets", b =>
                 {
                     b.Navigation("Photos");
-                });
-
-            modelBuilder.Entity("Projeto_Final.Models.Users", b =>
-                {
-                    b.Navigation("Pets");
                 });
 #pragma warning restore 612, 618
         }

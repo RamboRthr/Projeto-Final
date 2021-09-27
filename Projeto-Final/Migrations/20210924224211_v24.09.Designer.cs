@@ -10,8 +10,8 @@ using Projeto_Final.Models;
 namespace Projeto_Final.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    [Migration("20210921214642_v01")]
-    partial class v01
+    [Migration("20210924224211_v24.09")]
+    partial class v2409
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,11 +46,11 @@ namespace Projeto_Final.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("New_owner_id")
-                        .HasColumnType("text");
+                    b.Property<int?>("New_owner_idId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Old_owner_id")
-                        .HasColumnType("text");
+                    b.Property<int?>("Old_owner_idId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Publication_date")
                         .HasColumnType("timestamp without time zone");
@@ -59,6 +59,10 @@ namespace Projeto_Final.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("New_owner_idId");
+
+                    b.HasIndex("Old_owner_idId");
 
                     b.ToTable("Pets");
                 });
@@ -141,6 +145,21 @@ namespace Projeto_Final.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Projeto_Final.Models.Pets", b =>
+                {
+                    b.HasOne("Projeto_Final.Models.Users", "New_owner_id")
+                        .WithMany()
+                        .HasForeignKey("New_owner_idId");
+
+                    b.HasOne("Projeto_Final.Models.Users", "Old_owner_id")
+                        .WithMany()
+                        .HasForeignKey("Old_owner_idId");
+
+                    b.Navigation("New_owner_id");
+
+                    b.Navigation("Old_owner_id");
                 });
 
             modelBuilder.Entity("Projeto_Final.Models.Photo", b =>

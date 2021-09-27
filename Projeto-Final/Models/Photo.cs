@@ -10,9 +10,7 @@ namespace Projeto_Final.Models
     {
         [Key]
         public int Photo_Id { get; set; }
-        public string Pet_name { get; set; }
-        public int User_Id { get; set; }
         public DateTime Publication_date { get; set; }
-        public string PhotoURL { get; set; }
+        public string PhotoPath { get; set; }
     }
 }
