@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,8 +19,8 @@ namespace Projeto_Final.Models
         public int Age_months { get; set; }
         public string Size { get; set; } 
         public bool Adopted { get; set; }
-        public string Old_owner_id { get; set; }
-        public string New_owner_id { get; set; }
+        public virtual Users Old_owner_id { get; set; }
+        public virtual Users New_owner_id { get; set; }
         public List<Photo> Photos { get; set; }
     }
 }
