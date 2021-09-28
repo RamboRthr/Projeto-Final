@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace Projeto_Final.Models
 {
-    public class Users 
+    public class Users : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
         public string CPF { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Email { get; set; }
         public string Phone { get; set; }
         public string District { get; set; }
         public string Street { get; set; }
