@@ -77,6 +77,7 @@ namespace Projeto_Final.Controllers
         [HttpPost]
         public async Task<ActionResult<Pets>> PostPets(Pets pets)
         {
+            pets.Current_owner = _context.Users.Single(user => user.Id == pets.Current_owner.Id);
             _context.Pets.Add(pets);
             await _context.SaveChangesAsync();
 
