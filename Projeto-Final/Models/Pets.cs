@@ -14,8 +14,7 @@ namespace Projeto_Final.Models
         public string Name { get; set; }
         public string Animal { get; set; }
         public string Breed { get; set; }
-        public int Age_years { get; set; }
-        public int Age_months { get; set; }
+        public string Age { get; set; }
         public string Size { get; set; } 
         public bool Adopted { get; set; }
         public virtual int Current_owner_id { get; set; }
