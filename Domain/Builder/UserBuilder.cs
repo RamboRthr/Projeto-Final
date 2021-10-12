@@ -10,12 +10,12 @@ namespace Domain.Builder
         public string Surname { get; private set; }
         public string Cpf { get; private set; }
         public string Email { get; private set; }
-        public int Phone { get; private set; }
+        public string Phone { get; private set; }
         public string Street { get; private set; }
-        public int HouseNumber { get; private set; }
+        public string HouseNumber { get; private set; }
         public string District { get; private set; }
-        public int Cep { get; private set; }
-        public DateTime BirthDate { get; private set; }
+        public string Cep { get; private set; }
+        public string BirthDate { get; private set; }
         public string Password { get; private set; }
 
         public UserBuilder SetId(int id)
@@ -43,7 +43,7 @@ namespace Domain.Builder
             this.Email = email;
             return this;
         }
-        public UserBuilder SetPhone(int phone)
+        public UserBuilder SetPhone(string phone)
         {
             this.Phone = phone;
             return this;
@@ -53,7 +53,7 @@ namespace Domain.Builder
             this.Street = street;
             return this;
         }
-        public UserBuilder SetHouseNumber(int houseNumber)
+        public UserBuilder SetHouseNumber(string houseNumber)
         {
             this.HouseNumber = houseNumber;
             return this;
@@ -63,12 +63,12 @@ namespace Domain.Builder
             this.District = district;
             return this;
         }
-        public UserBuilder SetCep(int cep)
+        public UserBuilder SetCep(string cep)
         {
             this.Cep = cep;
             return this;
         }
-        public UserBuilder SetBirthDate(DateTime birthDate)
+        public UserBuilder SetBirthDate(string birthDate)
         {
             this.BirthDate = birthDate;
             return this;

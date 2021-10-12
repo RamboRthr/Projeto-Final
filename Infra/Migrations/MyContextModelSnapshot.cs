@@ -29,11 +29,11 @@ namespace Infra.Migrations
                     b.Property<bool>("Adopted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("AgeMonths")
-                        .HasColumnType("int");
+                    b.Property<string>("AgeMonths")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AgeYears")
-                        .HasColumnType("int");
+                    b.Property<string>("AgeYears")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Breed")
                         .HasColumnType("nvarchar(max)");
@@ -105,11 +105,11 @@ namespace Infra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("BirthDate")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Cep")
-                        .HasColumnType("int");
+                    b.Property<string>("Cep")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cpf")
                         .HasColumnType("nvarchar(max)");
@@ -126,8 +126,8 @@ namespace Infra.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HouseNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("HouseNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -135,8 +135,8 @@ namespace Infra.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");

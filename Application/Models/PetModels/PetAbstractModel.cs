@@ -17,10 +17,10 @@ namespace Application.Models.PetModels
         public string Breed { get; set; }
 
         [Required(ErrorMessage = "A Idade do Pet (Anos) é um campo obrigatório")]
-        public int AgeYears { get; set; }
+        public string AgeYears { get; set; }
 
         [Required(ErrorMessage = "A Idade do Pet (Meses) é um campo obrigatório")]
-        public int AgeMonths { get; set; }
+        public string AgeMonths { get; set; }
 
         [Required(ErrorMessage = "O Porte do Pet é um campo obrigatório")]
         [StringLength(30, ErrorMessage = "O Porte do Pet deve ter no máximo {1} caracteres.")]

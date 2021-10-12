@@ -1,5 +1,4 @@
 ﻿using Application.Models.PetModels;
-using Application.Models.UserModels;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;

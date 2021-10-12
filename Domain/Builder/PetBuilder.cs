@@ -9,8 +9,8 @@ namespace Domain.Builder
         public string Name { get; private set; }
         public string Specie { get; private set; }
         public string Breed { get; private set; }
-        public int AgeYears { get; private set; }
-        public int AgeMonths { get; private set; }
+        public string AgeYears { get; private set; }
+        public string AgeMonths { get; private set; }
         public string Size { get; private set; }
         public string Description { get; private set; }
 
@@ -39,12 +39,12 @@ namespace Domain.Builder
             this.Specie = specie;
             return this;
         }
-        public PetBuilder SetAgeYears(int ageYears)
+        public PetBuilder SetAgeYears(string ageYears)
         {
             this.AgeYears = ageYears;
             return this;
         }
-        public PetBuilder SetAgeMonths(int ageMonths)
+        public PetBuilder SetAgeMonths(string ageMonths)
         {
             this.AgeMonths = ageMonths;
             return this;

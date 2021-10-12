@@ -9,8 +9,8 @@ namespace Domain.Entities
         public string Name { get; protected set; }
         public string Specie { get; protected set; }
         public string Breed { get; protected set; }
-        public int AgeYears { get; protected set; }
-        public int AgeMonths { get; protected set; }
+        public string AgeYears { get; protected set; }
+        public string AgeMonths { get; protected set; }
         public string Size { get; protected set; }
         public bool Adopted { get; protected set; } = false;
         public string Description { get; protected set; }

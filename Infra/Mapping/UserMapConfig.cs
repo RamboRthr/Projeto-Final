@@ -23,7 +23,7 @@ namespace Infra.Mapping
 
             builder.Property(u => u.Cpf)
                    .IsRequired()
-                   .HasMaxLength(11);
+                   .HasMaxLength(50);
 
             builder.Property(u => u.Email)
                    .IsRequired()
@@ -31,7 +31,7 @@ namespace Infra.Mapping
 
             builder.Property(u => u.Phone)
                    .IsRequired()
-                   .HasMaxLength(30);
+                   .HasMaxLength(50);
 
             builder.Property(u => u.Street)
                    .IsRequired()
@@ -39,7 +39,7 @@ namespace Infra.Mapping
 
             builder.Property(u => u.HouseNumber)
                    .IsRequired()
-                   .HasMaxLength(10);
+                   .HasMaxLength(50);
 
             builder.Property(u => u.District)
                    .IsRequired()
@@ -47,7 +47,7 @@ namespace Infra.Mapping
 
             builder.Property(u => u.Cep)
                    .IsRequired()
-                   .HasMaxLength(10);
+                   .HasMaxLength(50);
 
             builder.Property(u => u.BirthDate)
                    .IsRequired()

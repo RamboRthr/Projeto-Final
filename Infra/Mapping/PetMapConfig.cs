@@ -21,6 +21,7 @@ namespace Infra.Mapping
                    .HasMaxLength(50);
 
             builder.Property(u => u.Specie)
+                   .IsRequired()
                    .HasMaxLength(30);
 
             builder.Property(u => u.Breed)

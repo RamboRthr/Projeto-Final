@@ -1,5 +1,4 @@
-﻿using Application.Models.PetModels;
-using Application.Models.PhotoModels;
+﻿using Application.Models.PhotoModels;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,7 +18,6 @@ namespace Web.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IPhotoService _photoService;
         private readonly IPetService _petService;
-
 
         public PhotoController(IPhotoService photoService, IWebHostEnvironment webHostEnvironment, IPetService petService)
         {
@@ -64,9 +62,9 @@ namespace Web.Controllers
             {
                 return BadRequest("Um arquivo precisa ser informado.");
             }
-            
+
             var permitedExtensions = new List<string> { ".jpg", ".png", ".jpeg" };
-            
+
             var fileExtension = Path.GetExtension(photoFile.FileName).ToLowerInvariant();
 
             if (!permitedExtensions.Contains(fileExtension))

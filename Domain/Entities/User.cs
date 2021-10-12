@@ -10,12 +10,12 @@ namespace Domain.Entities
         public string Surname { get; protected set; }
         public string Cpf { get; protected set; }
         public string Email { get; protected set; }
-        public int Phone { get; protected set; }
+        public string Phone { get; protected set; }
         public string Street { get; protected set; }
-        public int HouseNumber { get; protected set; }
+        public string HouseNumber { get; protected set; }
         public string District { get; protected set; }
-        public int Cep { get; protected set; }
-        public DateTime BirthDate { get; protected set; }
+        public string Cep { get; protected set; }
+        public string BirthDate { get; protected set; }
         public string Password { get; protected set; }
         public List<Pet> Pets { get; protected set; }
 

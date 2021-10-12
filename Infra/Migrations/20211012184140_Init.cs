@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,12 +17,12 @@ namespace Infra.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HouseNumber = table.Column<int>(type: "int", nullable: false),
+                    HouseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cep = table.Column<int>(type: "int", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -42,8 +42,8 @@ namespace Infra.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Specie = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Breed = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AgeYears = table.Column<int>(type: "int", nullable: false),
-                    AgeMonths = table.Column<int>(type: "int", nullable: false),
+                    AgeYears = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AgeMonths = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Adopted = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
