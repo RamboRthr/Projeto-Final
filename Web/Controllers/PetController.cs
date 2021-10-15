@@ -60,7 +60,7 @@ namespace Web.Controllers
         [Authorize("Bearer")]
         [Route("create-pet")]
         [HttpPost]
-        public async Task<ActionResult> CreatePet([FromRoute] PetRequestModel requestModel)
+        public async Task<ActionResult> CreatePet(PetRequestModel requestModel)
         {
             var user = await _userService.GetUserById(requestModel.UserId);
 
@@ -88,7 +88,7 @@ namespace Web.Controllers
         [Authorize("Bearer")]
         [Route("update-pet")]
         [HttpPut]
-        public async Task<ActionResult> UpdatePet([FromRoute] PetUpdateRequestModel requestModel)
+        public async Task<ActionResult> UpdatePet(PetUpdateRequestModel requestModel)
         {
             if (await _petService.GetPetById(requestModel.Id) == null)
             {

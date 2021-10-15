@@ -63,7 +63,7 @@ namespace Web.Controllers
 
         [Route("create-user")]
         [HttpPost]
-        public async Task<ActionResult> Create([FromRoute] UserRequestModel requestModel)
+        public async Task<ActionResult> Create(UserRequestModel requestModel)
         {
             if (await _userService.VerifyIfUserCpfAlredyExists(requestModel.Cpf) != null)
             {
@@ -89,7 +89,7 @@ namespace Web.Controllers
         [Authorize("Bearer")]
         [Route("update-user")]
         [HttpPut]
-        public async Task<ActionResult> UpdateUser([FromRoute] UserUpdateRequestModel updateRequestModel)
+        public async Task<ActionResult> UpdateUser(UserUpdateRequestModel updateRequestModel)
         {
             if (await _userService.GetUserById(updateRequestModel.Id) == null)
             {

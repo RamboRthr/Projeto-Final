@@ -21,7 +21,7 @@ namespace Web.Controllers
         [AllowAnonymous]
         [Route("authenticate-user")]
         [HttpPost]
-        public async Task<ActionResult> AuthenticateUser([FromRoute] UserLoginRequestModel loginRequestModel)
+        public async Task<ActionResult> AuthenticateUser(UserLoginRequestModel loginRequestModel)
         {
             try
             {
