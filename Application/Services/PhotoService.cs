@@ -5,7 +5,6 @@ using Domain.Builder;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +33,9 @@ namespace Application.Services
             await _photoRepository.Save();
         }
 
-        public async Task<string> SavePhotoFile(string allPetsPhotosFolderPath, IFormFile photoFile, int petId)
+        public async Task<string> SavePhotoFile(string allPetsPhotosFolderPath,
+                                                IFormFile photoFile,
+                                                int petId)
         {
 
             if (!Directory.Exists(allPetsPhotosFolderPath))
@@ -64,11 +65,11 @@ namespace Application.Services
             return _mapper.Map<PhotoResponseModel>(result);
         }
 
-        public async Task<List<PhotoResponseModel>> GetPhotosByPetId(int petId)
+        public async Task<PhotoResponseModel> GetPhotoByPetId(int petId)
         {
-            var result = await _photoRepository.GetPhotosByPetId(petId);
+            var result = await _photoRepository.GetPhotoByPetId(petId);
 
-            return _mapper.Map<List<PhotoResponseModel>>(result.Distinct());
+            return _mapper.Map<PhotoResponseModel>(result);
         }
 
         public async Task DeletePhoto(int photoId, string photoPath)
@@ -79,7 +80,7 @@ namespace Application.Services
 
             await _photoRepository.Save();
         }
-        
+
         private static void CreateFile(string folderPath, string fileName, IFormFile photoFile)
         {
             FileStream fileStream = File.Create(folderPath + fileName);
@@ -87,7 +88,7 @@ namespace Application.Services
             fileStream.Flush();
             fileStream.Dispose();
         }
-        
+
         private async Task DeletePhotoFile(string photoPath, int photoId)
         {
             File.Delete(photoPath);
@@ -100,7 +101,7 @@ namespace Application.Services
             {
                 var photo = await _photoRepository.GetById(photoId);
 
-                await _photoRepository.DeleteAllPhotoRecordsFromPet(photo.PetId);
+                await _photoRepository.DeletePhotoRecordFromPet(photo.PetId);
 
                 Directory.Delete(specificPetFolder);
             }

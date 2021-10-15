@@ -6,10 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 namespace Web.DependencyInjection.Application
 {
     [ExcludeFromCodeCoverage]
-    internal class Services
+    public static class Services
     {
-        public void AddServicesDependencyInjection(IServiceCollection services)
+        public static void AddServicesDependencyInjection(IServiceCollection services)
         {
+            services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IPetService, PetService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPhotoService, PhotoService>();

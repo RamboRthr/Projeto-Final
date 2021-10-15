@@ -1,5 +1,6 @@
 ﻿using Application.Models.PetModels;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -19,9 +20,10 @@ namespace Web.Controllers
             _userService = userService;
         }
 
-        [Route("get-pet-by-id")]
+        [Authorize("Bearer")]
+        [Route("get-pet-by-{petId}")]
         [HttpGet]
-        public async Task<ActionResult> GetPetById(int petId)
+        public async Task<ActionResult> GetPetById([FromRoute] int petId)
         {
             try
             {
@@ -40,6 +42,7 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [Route("get-all-pets")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
@@ -54,9 +57,10 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [Route("create-pet")]
         [HttpPost]
-        public async Task<ActionResult> CreatePet(PetRequestModel requestModel)
+        public async Task<ActionResult> CreatePet([FromRoute] PetRequestModel requestModel)
         {
             var user = await _userService.GetUserById(requestModel.UserId);
 
@@ -81,9 +85,10 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [Route("update-pet")]
         [HttpPut]
-        public async Task<ActionResult> UpdatePet(PetUpdateRequestModel requestModel)
+        public async Task<ActionResult> UpdatePet([FromRoute] PetUpdateRequestModel requestModel)
         {
             if (await _petService.GetPetById(requestModel.Id) == null)
             {
@@ -101,9 +106,10 @@ namespace Web.Controllers
             }
         }
 
-        [Route("confirm-pet-adoption-id")]
+        [Authorize("Bearer")]
+        [Route("confirm-pet-adoption-by-{petId}")]
         [HttpPut]
-        public async Task<ActionResult> ConfirmPetAdoption(int petId)
+        public async Task<ActionResult> ConfirmPetAdoption([FromRoute] int petId)
         {
             if (await _petService.GetPetById(petId) == null)
             {
@@ -121,9 +127,10 @@ namespace Web.Controllers
             }
         }
 
-        [Route("delete-pet-by-id")]
+        [Authorize("Bearer")]
+        [Route("delete-pet-by-{petId}")]
         [HttpDelete]
-        public async Task<ActionResult> DeletePet(int petId)
+        public async Task<ActionResult> DeletePet([FromRoute] int petId)
         {
             if (await _petService.GetPetById(petId) == null)
             {
@@ -141,9 +148,10 @@ namespace Web.Controllers
             }
         }
 
-        [Route("get-pets-by-user-id")]
+        [Authorize("Bearer")]
+        [Route("get-pets-by-userId")]
         [HttpGet]
-        public async Task<ActionResult> GetPetsByUserId(int userId)
+        public async Task<ActionResult> GetPetsByUserId([FromRoute] int userId)
         {
             var user = await _userService.GetUserById(userId);
 

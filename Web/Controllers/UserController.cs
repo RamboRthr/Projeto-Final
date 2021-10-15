@@ -1,5 +1,6 @@
 ﻿using Application.Models.UserModels;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -11,15 +12,22 @@ namespace Web.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IPhotoService _photoService;
+        private readonly IPetService _petService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService,
+                              IPhotoService photoService,
+                              IPetService petService)
         {
             _userService = userService;
+            _photoService = photoService;
+            _petService = petService;
         }
 
-        [Route("get-user-by-id")]
+        [Authorize("Bearer")]
+        [Route("get-user-by-{userId}")]
         [HttpGet]
-        public async Task<ActionResult> GetUserById(int userId)
+        public async Task<ActionResult> GetUserById([FromRoute] int userId)
         {
             try
             {
@@ -38,6 +46,7 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [Route("get-all-users")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
@@ -54,7 +63,7 @@ namespace Web.Controllers
 
         [Route("create-user")]
         [HttpPost]
-        public async Task<ActionResult> Create(UserRequestModel requestModel)
+        public async Task<ActionResult> Create([FromRoute] UserRequestModel requestModel)
         {
             if (await _userService.VerifyIfUserCpfAlredyExists(requestModel.Cpf) != null)
             {
@@ -77,9 +86,10 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [Route("update-user")]
         [HttpPut]
-        public async Task<ActionResult> UpdateUser(UserUpdateRequestModel updateRequestModel)
+        public async Task<ActionResult> UpdateUser([FromRoute] UserUpdateRequestModel updateRequestModel)
         {
             if (await _userService.GetUserById(updateRequestModel.Id) == null)
             {
@@ -98,9 +108,10 @@ namespace Web.Controllers
             }
         }
 
-        [Route("delete-user-by-id")]
+        [Authorize("Bearer")]
+        [Route("delete-user-by-{userId}")]
         [HttpDelete]
-        public async Task<ActionResult> DeleteUser(int userId)
+        public async Task<ActionResult> DeleteUser([FromRoute] int userId)
         {
             if (await _userService.GetUserById(userId) == null)
             {
@@ -110,6 +121,16 @@ namespace Web.Controllers
             try
             {
                 await _userService.DeleteUser(userId);
+
+                var petsFromDeletedUser = await _petService.GetPetsByUserId(userId);
+
+                foreach (var pet in petsFromDeletedUser)
+                {
+                    var photo = await _photoService.GetPhotoByPetId(pet.Id);
+
+                    await _photoService.DeletePhoto(photo.Id, photo.PhotoPath);
+                }
+
                 return Ok();
             }
             catch (Exception ex)

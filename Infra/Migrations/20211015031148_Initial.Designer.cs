@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20211012184140_Init")]
-    partial class Init
+    [Migration("20211015031148_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,7 +95,8 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PetId");
+                    b.HasIndex("PetId")
+                        .IsUnique();
 
                     b.ToTable("Photos");
                 });
@@ -168,8 +169,8 @@ namespace Infra.Migrations
             modelBuilder.Entity("Domain.Entities.Photo", b =>
                 {
                     b.HasOne("Domain.Entities.Pet", "Pet")
-                        .WithMany("PetPhotos")
-                        .HasForeignKey("PetId")
+                        .WithOne("PetPhoto")
+                        .HasForeignKey("Domain.Entities.Photo", "PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -178,7 +179,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entities.Pet", b =>
                 {
-                    b.Navigation("PetPhotos");
+                    b.Navigation("PetPhoto");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

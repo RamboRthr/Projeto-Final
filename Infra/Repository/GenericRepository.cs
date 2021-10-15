@@ -46,6 +46,7 @@ namespace Infra.Repository
 
             _dbSet.Remove(result);
         }
+
         public async Task Save() => await _dbContext.SaveChangesAsync();
         protected IQueryable<T> Query() => _dbSet.AsNoTracking().Where(entity => !entity.Deleted);
     }

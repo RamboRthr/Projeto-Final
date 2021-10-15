@@ -17,6 +17,11 @@ namespace Infra.Repository
             return await Query().SingleOrDefaultAsync(entity => entity.Id == id);
         }
 
+        public async Task<User> GetUserByEmailAndPassword(string email, string password)
+        {
+            return await Query().SingleOrDefaultAsync(entity => entity.Email == email && entity.Password == password);
+        }
+
         public async Task<User> GetUserWithPets()
         {
             return await Query().SingleOrDefaultAsync(entity => entity.Pets[0].UserId == entity.Id);

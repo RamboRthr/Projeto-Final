@@ -93,7 +93,8 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PetId");
+                    b.HasIndex("PetId")
+                        .IsUnique();
 
                     b.ToTable("Photos");
                 });
@@ -166,8 +167,8 @@ namespace Infra.Migrations
             modelBuilder.Entity("Domain.Entities.Photo", b =>
                 {
                     b.HasOne("Domain.Entities.Pet", "Pet")
-                        .WithMany("PetPhotos")
-                        .HasForeignKey("PetId")
+                        .WithOne("PetPhoto")
+                        .HasForeignKey("Domain.Entities.Photo", "PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -176,7 +177,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entities.Pet", b =>
                 {
-                    b.Navigation("PetPhotos");
+                    b.Navigation("PetPhoto");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

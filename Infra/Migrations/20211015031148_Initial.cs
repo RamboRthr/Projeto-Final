@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,7 +94,8 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_PetId",
                 table: "Photos",
-                column: "PetId");
+                column: "PetId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

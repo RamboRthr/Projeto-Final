@@ -1,12 +1,12 @@
 ﻿using Application.Models.PhotoModels;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Web.Controllers
@@ -26,9 +26,10 @@ namespace Web.Controllers
             _petService = petService;
         }
 
-        [Route("get-photos-by-pet-id")]
+        [Authorize("Bearer")]
+        [Route("get-photos-by-pet-{petId}")]
         [HttpGet]
-        public async Task<ActionResult> GetPhotosByPetId(int petId)
+        public async Task<ActionResult> GetPhotosByPetId([FromRoute] int petId)
         {
             var pet = await _petService.GetPetById(petId);
 
@@ -39,14 +40,14 @@ namespace Web.Controllers
 
             try
             {
-                var petPhotosList = await _photoService.GetPhotosByPetId(petId);
+                var petPhoto = await _photoService.GetPhotoByPetId(petId);
 
-                if (!petPhotosList.Any())
+                if (petPhoto == null)
                 {
                     return NotFound($"O Pet '{pet.Name}' ainda não tem nenhuma foto cadastrada.");
                 }
 
-                return Ok(petPhotosList);
+                return Ok(petPhoto);
             }
             catch (Exception ex)
             {
@@ -54,6 +55,7 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize("Bearer")]
         [Route("create-photo")]
         [HttpPost]
         public async Task<ActionResult> CreatePetPhoto([FromForm] PhotoRequestModel requestModel, IFormFile photoFile)
@@ -95,9 +97,10 @@ namespace Web.Controllers
             }
         }
 
-        [Route("delete-photo-by-id")]
+        [Authorize("Bearer")]
+        [Route("delete-photo-by-{photoId}")]
         [HttpDelete]
-        public async Task<ActionResult> DeletePhoto(int photoId)
+        public async Task<ActionResult> DeletePhoto([FromRoute] int photoId)
         {
             var photo = await _photoService.GetPhotoById(photoId);
 

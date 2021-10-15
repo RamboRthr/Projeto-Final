@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Web.DependencyInjection.Infra
 {
     [ExcludeFromCodeCoverage]
-    internal class Repositories
+    public static class Repositories
     {
-        public void AddRepositoriesDependencyInjection(IServiceCollection services)
+        public static void AddRepositoriesDependencyInjection(IServiceCollection services)
         {
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

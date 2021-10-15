@@ -1,6 +1,5 @@
 ﻿using Domain.Builder;
 using System;
-using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -16,7 +15,7 @@ namespace Domain.Entities
         public string Description { get; protected set; }
         public int UserId { get; protected set; }
         public User User { get; protected set; }
-        public List<Photo> PetPhotos { get; protected set; }
+        public Photo PetPhoto { get; protected set; }
 
         public static Pet Creator(PetBuilder petBuilder)
         {

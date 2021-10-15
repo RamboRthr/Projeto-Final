@@ -2,8 +2,6 @@
 using Domain.Interfaces;
 using Infra.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infra.Repository
@@ -14,19 +12,16 @@ namespace Infra.Repository
         {
         }
 
-        public async Task DeleteAllPhotoRecordsFromPet(int id)
+        public async Task DeletePhotoRecordFromPet(int id)
         {
-            var photos = await Query().Where(p => p.PetId == id).ToListAsync();
+            var photo = await Query().SingleOrDefaultAsync(p => p.PetId == id);
 
-            foreach (var photo in photos)
-            {
-                _dbSet.Remove(photo);
-            }
+            _dbSet.Remove(photo);
         }
 
-        public async Task<List<Photo>> GetPhotosByPetId(int id)
+        public async Task<Photo> GetPhotoByPetId(int id)
         {
-            return await Query().Where(p => p.PetId == id).ToListAsync();
+            return await Query().SingleOrDefaultAsync(p => p.PetId == id);
         }
     }
 }

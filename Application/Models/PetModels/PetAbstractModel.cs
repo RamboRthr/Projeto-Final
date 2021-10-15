@@ -8,6 +8,9 @@ namespace Application.Models.PetModels
         [StringLength(50, ErrorMessage = "O Nome do Pet deve ter no máximo {1} caracteres.")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "O Id do Dono é um campo obrigatório")]
+        public virtual int UserId { get; set; }
+
         [Required(ErrorMessage = "A Especie do Pet é um campo obrigatório")]
         [StringLength(30, ErrorMessage = "A Especie do Pet deve ter no máximo {1} caracteres.")]
         public string Specie { get; set; }

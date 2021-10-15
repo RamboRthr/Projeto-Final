@@ -1,9 +1,11 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Mapping
 {
+    [ExcludeFromCodeCoverage]
     public class PetMapConfig : IEntityTypeConfiguration<Pet>
     {
         public void Configure(EntityTypeBuilder<Pet> builder)
@@ -47,9 +49,8 @@ namespace Infra.Mapping
                    .IsRequired()
                    .HasMaxLength(300);
 
-            builder.HasMany(u => u.PetPhotos)
-                   .WithOne(x => x.Pet)
-                   .HasForeignKey(x => x.PetId);
+            builder.HasOne(u => u.PetPhoto)
+                   .WithOne(x => x.Pet);
         }
     }
 }
