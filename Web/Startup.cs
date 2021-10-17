@@ -42,6 +42,7 @@ namespace Web
                                       .AllowAnyHeader()
                                       .AllowAnyMethod();
                                   });
+
             });
             services.AddControllers();
 
