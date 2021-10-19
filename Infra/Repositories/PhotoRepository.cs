@@ -12,16 +12,16 @@ namespace Infra.Repository
         {
         }
 
-        public async Task DeletePhotoRecordFromPet(int id)
+        public async Task DeletePhotoRecordFromPet(int petId)
         {
-            var photo = await Query().SingleOrDefaultAsync(p => p.PetId == id);
+            var photo = await Query().SingleOrDefaultAsync(pet => pet.PetId == petId);
 
             _dbSet.Remove(photo);
         }
 
-        public async Task<Photo> GetPhotoByPetId(int id)
+        public async Task<Photo> GetPhotoByPetId(int petId)
         {
-            return await Query().SingleOrDefaultAsync(p => p.PetId == id);
+            return await Query().SingleOrDefaultAsync(pet => pet.PetId == petId);
         }
     }
 }

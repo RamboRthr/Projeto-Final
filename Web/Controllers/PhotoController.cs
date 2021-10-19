@@ -27,38 +27,9 @@ namespace Web.Controllers
         }
 
         [Authorize("Bearer")]
-        [Route("get-photos-by-pet-{petId}")]
-        [HttpGet]
-        public async Task<ActionResult> GetPhotosByPetId([FromRoute] int petId)
-        {
-            var pet = await _petService.GetPetById(petId);
-
-            if (pet == null)
-            {
-                return NotFound($"Não existe um Pet com o Id:{petId} na Base de dados. Verifique e tente novamente.");
-            }
-
-            try
-            {
-                var petPhoto = await _photoService.GetPhotoByPetId(petId);
-
-                if (petPhoto == null)
-                {
-                    return NotFound($"O Pet '{pet.Name}' ainda não tem nenhuma foto cadastrada.");
-                }
-
-                return Ok(petPhoto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
         [Route("create-photo")]
         [HttpPost]
-        public async Task<ActionResult> CreatePetPhoto([FromForm] PhotoRequestModel requestModel, IFormFile photoFile)
+        public async Task<ActionResult> CreatePhoto([FromForm] PhotoRequestModel requestModel, IFormFile photoFile)
         {
             if (photoFile == null || photoFile.Length == 0)
             {
@@ -81,6 +52,11 @@ namespace Web.Controllers
                 return NotFound($"Não existe um Pet com o Id:{requestModel.PetId} na Base de dados. Verifique e tente novamente.");
             }
 
+            if (pet.PetPhoto.PhotoPath.Length > 0)
+            {
+                await _photoService.DeletePhotoFile(pet.PetPhoto.PhotoPath, pet.PetPhoto.Id);
+            }
+
             string petPhotosFolderPath = _webHostEnvironment.WebRootPath + "\\PetUploadedPhotos\\";
 
             try
@@ -98,20 +74,23 @@ namespace Web.Controllers
         }
 
         [Authorize("Bearer")]
-        [Route("delete-photo-by-{photoId}")]
+        [Route("delete-photo-by-{petId}")]
         [HttpDelete]
-        public async Task<ActionResult> DeletePhoto([FromRoute] int photoId)
+        public async Task<ActionResult> DeletePhoto([FromRoute] int petId)
         {
-            var photo = await _photoService.GetPhotoById(photoId);
+            var pet = await _petService.GetPetById(petId);
 
-            if (photo == null)
+            if (pet == null)
             {
-                return NotFound($"Não existe Foto com o Id:{photoId} na Base de dados.");
+                return NotFound($"Não existe um Pet com ID:{petId} na Base de dados.");
             }
-
+            if (pet.PetPhoto == null)
+            {
+                return NotFound($"O Pet {pet.Name} não tem uma Foto cadastrada na Base de dados.");
+            }
             try
             {
-                await _photoService.DeletePhoto(photoId, photo.PhotoPath);
+                await _photoService.DeletePhoto(pet.PetPhoto.Id, pet.PetPhoto.PhotoPath);
                 return Ok();
             }
             catch (Exception ex)

@@ -35,6 +35,7 @@ namespace Domain.Entities
                 Cep = userBuilder.Cep,
                 BirthDate = userBuilder.BirthDate,
                 Password = userBuilder.Password,
+                Pets = userBuilder.Pets,
                 CreatedAt = DateTime.Now
             };
         }

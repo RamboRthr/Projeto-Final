@@ -18,5 +18,12 @@ namespace Domain.Entities
                 CreatedAt = DateTime.Now
             };
         }
+
+        public void UpdatePhoto(Photo updatedPhoto)
+        {
+            PetId = updatedPhoto.PetId;
+            PhotoPath = updatedPhoto.PhotoPath;
+            UpdatedAt = DateTime.Now;
+        }
     }
 }

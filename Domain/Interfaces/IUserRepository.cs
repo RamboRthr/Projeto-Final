@@ -6,11 +6,9 @@ namespace Domain.Interfaces
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-        Task<User> GetUserById(int id);
+        Task<User> GetUserById(int userId);
         Task<User> GetUserByEmailAndPassword(string email, string password);
-        Task<User> GetUserWithPets();
         Task<User> VerifyIfUserCpfAlredyExists(string userCpf);
         Task<User> VerifyIfUserEmailAlredyExists(string userEmail);
-        Task<List<User>> GetAll();
     }
 }

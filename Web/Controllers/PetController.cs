@@ -21,43 +21,6 @@ namespace Web.Controllers
         }
 
         [Authorize("Bearer")]
-        [Route("get-pet-by-{petId}")]
-        [HttpGet]
-        public async Task<ActionResult> GetPetById([FromRoute] int petId)
-        {
-            try
-            {
-                var pet = await _petService.GetPetById(petId);
-
-                if (pet == null)
-                {
-                    return NotFound($"Não existe um Pet com o Id:{petId} na Base de dados.");
-                }
-
-                return Ok(pet);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
-        [Route("get-all-pets")]
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            try
-            {
-                return Ok(await _petService.GetAllPets());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
         [Route("create-pet")]
         [HttpPost]
         public async Task<ActionResult> CreatePet(PetRequestModel requestModel)
@@ -107,27 +70,6 @@ namespace Web.Controllers
         }
 
         [Authorize("Bearer")]
-        [Route("confirm-pet-adoption-by-{petId}")]
-        [HttpPut]
-        public async Task<ActionResult> ConfirmPetAdoption([FromRoute] int petId)
-        {
-            if (await _petService.GetPetById(petId) == null)
-            {
-                return NotFound($"Não existe um Pet com Id:{petId} na base de dados que possa ter o status de adoção alterado.");
-            }
-
-            try
-            {
-                await _petService.ConfirmPetAdoption(petId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
         [Route("delete-pet-by-{petId}")]
         [HttpDelete]
         public async Task<ActionResult> DeletePet([FromRoute] int petId)
@@ -148,8 +90,44 @@ namespace Web.Controllers
             }
         }
 
+        [Route("get-all-pets")]
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            try
+            {
+                return Ok(await _petService.GetAllPets());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [Authorize("Bearer")]
-        [Route("get-pets-by-userId")]
+        [Route("get-pet-by-{petId}")]
+        [HttpGet]
+        public async Task<ActionResult> GetPetById([FromRoute] int petId)
+        {
+            try
+            {
+                var pet = await _petService.GetPetById(petId);
+
+                if (pet == null)
+                {
+                    return NotFound($"Não existe um Pet com o Id:{petId} na Base de dados.");
+                }
+
+                return Ok(pet);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize("Bearer")]
+        [Route("get-pets-by-{userId}")]
         [HttpGet]
         public async Task<ActionResult> GetPetsByUserId([FromRoute] int userId)
         {
@@ -176,5 +154,27 @@ namespace Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize("Bearer")]
+        [Route("confirm-pet-adoption-by-{petId}")]
+        [HttpPut]
+        public async Task<ActionResult> ConfirmPetAdoption([FromRoute] int petId)
+        {
+            if (await _petService.GetPetById(petId) == null)
+            {
+                return NotFound($"Não existe um Pet com Id:{petId} na base de dados que possa ter o status de adoção alterado.");
+            }
+
+            try
+            {
+                await _petService.ConfirmPetAdoption(petId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

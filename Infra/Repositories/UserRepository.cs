@@ -12,29 +12,29 @@ namespace Infra.Repository
         {
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(int userId)
         {
-            return await Query().SingleOrDefaultAsync(entity => entity.Id == id);
+            return await Query().SingleOrDefaultAsync(user => user.Id == userId);
         }
 
         public async Task<User> GetUserByEmailAndPassword(string email, string password)
         {
-            return await Query().SingleOrDefaultAsync(entity => entity.Email == email && entity.Password == password);
+            return await Query().SingleOrDefaultAsync(user => user.Email == email && user.Password == password);
         }
 
         public async Task<User> GetUserWithPets()
         {
-            return await Query().SingleOrDefaultAsync(entity => entity.Pets[0].UserId == entity.Id);
+            return await Query().SingleOrDefaultAsync(user => user.Pets[0].UserId == user.Id);
         }
 
         public async Task<User> VerifyIfUserCpfAlredyExists(string userCpf)
         {
-            return await Query().SingleOrDefaultAsync(u => u.Cpf == userCpf);
+            return await Query().SingleOrDefaultAsync(user => user.Cpf == userCpf);
         }
 
         public async Task<User> VerifyIfUserEmailAlredyExists(string userEmail)
         {
-            return await Query().SingleOrDefaultAsync(u => u.Email == userEmail);
+            return await Query().SingleOrDefaultAsync(user => user.Email == userEmail);
         }
     }
 }

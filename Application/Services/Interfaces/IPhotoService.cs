@@ -8,8 +8,7 @@ namespace Application.Services.Interfaces
     {
         Task CreatePhotoRegister(string photoPath, int petId);
         Task<string> SavePhotoFile(string allPetsPhotosFolderPath, IFormFile photoFile, int petId);
-        Task<PhotoResponseModel> GetPhotoById(int photoId);
-        Task<PhotoResponseModel> GetPhotoByPetId(int petId);
         Task DeletePhoto(int photoId, string photoPath);
+        Task DeletePhotoFile(string photoPath, int photoId);
     }
 }

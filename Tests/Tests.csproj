@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,10 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Infra\Infra.csproj" />
-    <ProjectReference Include="..\Web\Web.csproj" />
+    <ProjectReference Include="..\Application\2-Services.csproj" />
+    <ProjectReference Include="..\Domain\3-Domain.csproj" />
+    <ProjectReference Include="..\Infra\4-Data.csproj" />
+    <ProjectReference Include="..\Web\1-API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="2-Services\" />
+    <Folder Include="4-Data\" />
+    <Folder Include="3-Domain\" />
   </ItemGroup>
 
 </Project>

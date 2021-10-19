@@ -5,7 +5,7 @@ namespace Domain.Interfaces
 {
     public interface IPhotoRepository : IGenericRepository<Photo>
     {
-        Task<Photo> GetPhotoByPetId(int id);
-        Task DeletePhotoRecordFromPet(int id);
+        Task<Photo> GetPhotoByPetId(int petId);
+        Task DeletePhotoRecordFromPet(int petId);
     }
 }

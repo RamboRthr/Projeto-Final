@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using System.Collections.Generic;
 
 namespace Domain.Builder
 {
@@ -16,6 +17,7 @@ namespace Domain.Builder
         public string Cep { get; private set; }
         public string BirthDate { get; private set; }
         public string Password { get; private set; }
+        public List<Pet> Pets { get; set; }
 
         public UserBuilder SetId(int id)
         {
@@ -75,6 +77,11 @@ namespace Domain.Builder
         public UserBuilder SetPassword(string password)
         {
             this.Password = password;
+            return this;
+        }
+        public UserBuilder SetPets(List<Pet> pets)
+        {
+            this.Pets = pets;
             return this;
         }
         public User Build()

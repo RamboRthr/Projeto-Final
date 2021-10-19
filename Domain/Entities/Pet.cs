@@ -30,6 +30,8 @@ namespace Domain.Entities
                 AgeYears = petBuilder.AgeYears,
                 AgeMonths = petBuilder.AgeMonths,
                 Size = petBuilder.Size,
+                User = petBuilder.User,
+                PetPhoto = petBuilder.Photo,
                 CreatedAt = DateTime.Now
             };
         }

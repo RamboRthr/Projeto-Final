@@ -6,8 +6,8 @@ namespace Domain.Interfaces
 {
     public interface IPetRepository : IGenericRepository<Pet>
     {
-        Task<List<Pet>> GetPetsByUserId(int id);
-        Task<Pet> GetPetById(int id);
+        Task<List<Pet>> GetPetsByUserId(int userId);
+        Task<Pet> GetPetById(int petId);
         Task<Pet> VerifyIfPetAlredyExists(Pet pet);
         Task<List<Pet>> GetAll();
     }

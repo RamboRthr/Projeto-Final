@@ -12,58 +12,15 @@ namespace Web.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IPhotoService _photoService;
-        private readonly IPetService _petService;
 
-        public UserController(IUserService userService,
-                              IPhotoService photoService,
-                              IPetService petService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _photoService = photoService;
-            _petService = petService;
-        }
-
-        [Authorize("Bearer")]
-        [Route("get-user-by-{userId}")]
-        [HttpGet]
-        public async Task<ActionResult> GetUserById([FromRoute] int userId)
-        {
-            try
-            {
-                var user = await _userService.GetUserById(userId);
-
-                if (user == null)
-                {
-                    return NotFound($"Não existe um Usuário com o Id:{userId} na Base de dados.");
-                }
-
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
-        [Route("get-all-users")]
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            try
-            {
-                return Ok(await _userService.GetAllUsers());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
 
         [Route("create-user")]
         [HttpPost]
-        public async Task<ActionResult> Create(UserRequestModel requestModel)
+        public async Task<ActionResult> CreateUser(UserRequestModel requestModel)
         {
             if (await _userService.VerifyIfUserCpfAlredyExists(requestModel.Cpf) != null)
             {
@@ -108,6 +65,7 @@ namespace Web.Controllers
             }
         }
 
+        
         [Authorize("Bearer")]
         [Route("delete-user-by-{userId}")]
         [HttpDelete]
@@ -122,16 +80,29 @@ namespace Web.Controllers
             {
                 await _userService.DeleteUser(userId);
 
-                var petsFromDeletedUser = await _petService.GetPetsByUserId(userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-                foreach (var pet in petsFromDeletedUser)
+        [Authorize("Bearer")]
+        [Route("get-user-by-{userId}")]
+        [HttpGet]
+        public async Task<ActionResult> GetUserById([FromRoute] int userId)
+        {
+            try
+            {
+                var user = await _userService.GetUserById(userId);
+
+                if (user == null)
                 {
-                    var photo = await _photoService.GetPhotoByPetId(pet.Id);
-
-                    await _photoService.DeletePhoto(photo.Id, photo.PhotoPath);
+                    return NotFound($"Não existe um Usuário com o Id:{userId} na Base de dados.");
                 }
 
-                return Ok();
+                return Ok(user);
             }
             catch (Exception ex)
             {

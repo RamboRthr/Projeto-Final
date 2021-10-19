@@ -6,13 +6,13 @@ namespace Application.Services.Interfaces
 {
     public interface IPetService
     {
-        Task<List<PetResponseModel>> GetAllPets();
         Task CreatePet(PetRequestModel petRequestModel);
         Task UpdatePet(PetUpdateRequestModel petRequestModel);
-        Task<PetResponseModel> GetPetById(int id);
-        Task<List<PetResponseModel>> GetPetsByUserId(int id);
+        Task DeletePet(int petId);
+        Task<List<PetResponseModel>> GetAllPets();
+        Task<PetResponseModel> GetPetById(int petId);
+        Task<List<PetResponseModel>> GetPetsByUserId(int userId);
         Task<PetResponseModel> VerifyIfPetAlredyExists(PetRequestModel petRequestModel);
-        Task ConfirmPetAdoption(int id);
-        Task DeletePet(int id);
+        Task ConfirmPetAdoption(int petId);
     }
 }

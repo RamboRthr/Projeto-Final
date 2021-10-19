@@ -13,6 +13,8 @@ namespace Domain.Builder
         public string AgeMonths { get; private set; }
         public string Size { get; private set; }
         public string Description { get; private set; }
+        public User User { get; private set; }
+        public Photo Photo { get; private set; }
 
         public PetBuilder SetId(int id)
         {
@@ -57,6 +59,16 @@ namespace Domain.Builder
         public PetBuilder SetDescription(string description)
         {
             this.Description = description;
+            return this;
+        }
+        public PetBuilder SetUser(User user)
+        {
+            this.User = user;
+            return this;
+        }
+        public PetBuilder SetPhoto(Photo photo)
+        {
+            this.Photo = photo;
             return this;
         }
         public Pet Build()

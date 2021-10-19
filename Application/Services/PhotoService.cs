@@ -15,13 +15,11 @@ namespace Application.Services
     {
         private readonly IPhotoRepository _photoRepository;
         private readonly IPetRepository _petRepository;
-        private readonly IMapper _mapper;
 
-        public PhotoService(IPhotoRepository photoRepository, IPetRepository petRepository, IMapper mapper)
+        public PhotoService(IPhotoRepository photoRepository, IPetRepository petRepository)
         {
             _photoRepository = photoRepository;
             _petRepository = petRepository;
-            _mapper = mapper;
         }
 
         public async Task CreatePhotoRegister(string photoPath, int petId)
@@ -33,9 +31,7 @@ namespace Application.Services
             await _photoRepository.Save();
         }
 
-        public async Task<string> SavePhotoFile(string allPetsPhotosFolderPath,
-                                                IFormFile photoFile,
-                                                int petId)
+        public async Task<string> SavePhotoFile(string allPetsPhotosFolderPath, IFormFile photoFile, int petId)
         {
 
             if (!Directory.Exists(allPetsPhotosFolderPath))
@@ -45,7 +41,8 @@ namespace Application.Services
 
             var petOwnerOfPhoto = await _petRepository.GetById(petId);
 
-            var specificPetPhotosFolderPath = allPetsPhotosFolderPath + "\\Pet.Name_" + $"{petOwnerOfPhoto.Name}" + "_Pet.Id_" + $"{petOwnerOfPhoto.Id}\\".ToString();
+            var specificPetPhotosFolderPath =
+                allPetsPhotosFolderPath + "\\Pet.Name_" + $"{petOwnerOfPhoto.Name}" + "_Pet.Id_" + $"{petOwnerOfPhoto.Id}\\".ToString();
 
             if (!Directory.Exists(specificPetPhotosFolderPath))
             {
@@ -59,19 +56,6 @@ namespace Application.Services
             return photoFilePath;
         }
 
-        public async Task<PhotoResponseModel> GetPhotoById(int photoId)
-        {
-            var result = await _photoRepository.GetById(photoId);
-            return _mapper.Map<PhotoResponseModel>(result);
-        }
-
-        public async Task<PhotoResponseModel> GetPhotoByPetId(int petId)
-        {
-            var result = await _photoRepository.GetPhotoByPetId(petId);
-
-            return _mapper.Map<PhotoResponseModel>(result);
-        }
-
         public async Task DeletePhoto(int photoId, string photoPath)
         {
             await DeletePhotoFile(photoPath, photoId);
@@ -81,15 +65,7 @@ namespace Application.Services
             await _photoRepository.Save();
         }
 
-        private static void CreateFile(string folderPath, string fileName, IFormFile photoFile)
-        {
-            FileStream fileStream = File.Create(folderPath + fileName);
-            photoFile.CopyTo(fileStream);
-            fileStream.Flush();
-            fileStream.Dispose();
-        }
-
-        private async Task DeletePhotoFile(string photoPath, int photoId)
+        public async Task DeletePhotoFile(string photoPath, int photoId)
         {
             File.Delete(photoPath);
 
@@ -107,7 +83,15 @@ namespace Application.Services
             }
         }
 
-        private static Photo ConvertToPhotoEntity(int petId, string photoPath)
+        private static void CreateFile(string folderPath, string fileName, IFormFile photoFile)
+        {
+            FileStream fileStream = File.Create(folderPath + fileName);
+            photoFile.CopyTo(fileStream);
+            fileStream.Flush();
+            fileStream.Dispose();
+        }
+
+        public static Photo ConvertToPhotoEntity(int petId, string photoPath)
         {
             return new PhotoBuilder()
                 .SetPetId(petId)
