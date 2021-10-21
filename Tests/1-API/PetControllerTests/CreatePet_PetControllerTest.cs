@@ -107,27 +107,6 @@ namespace Tests._1_API.PetControllerTests
         }
 
         [Fact]
-        public async Task Deve_Retornar_BadRequest_Se_PetNaoCriado()
-        {
-            //TA MUITO ERRADO MAS DEIXEI AQUI
-            try
-            {
-                _petService.When(s => s.CreatePet(requestModel))
-                .Do(s => { throw new Exception(); });
-            }
-            catch (Exception)
-            {
-                var response = await _petController.CreatePet(requestModel);
-
-                var okResponse = Assert.IsType<BadRequestObjectResult>(response);
-
-                Assert.NotNull(okResponse);
-                Assert.Equal(200, okResponse.StatusCode);
-                throw;
-            }
-        }
-
-        [Fact]
         public async Task Deve_Retornar_Ok_Se_PetCriado()
         {
             _userService.GetUserById(Arg.Any<int>()).Returns(userResponseModel);
