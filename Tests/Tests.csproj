@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="2-Services\" />
     <Folder Include="4-Data\" />
     <Folder Include="3-Domain\" />
   </ItemGroup>
